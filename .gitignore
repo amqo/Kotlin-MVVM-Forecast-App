@@ -7,8 +7,8 @@
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
-/.app/src/main/java/com/amqo/forecastapp/data/network/ApiSecret.kt
 .DS_Store
 /build
 /captures
+ApiSecret.kt
 .externalNativeBuild
