@@ -1,27 +1,23 @@
 package com.amqo.forecastapp.ui.weather.current
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.amqo.forecastapp.R
-import com.amqo.forecastapp.data.network.ApixuWeatherApiService
-import com.amqo.forecastapp.data.network.ConnectivityInterceptorImpl
-import com.amqo.forecastapp.data.network.WeatherNetworkDataSourceImpl
+import com.amqo.forecastapp.ui.base.ScopedFragment
 import kotlinx.android.synthetic.main.current_weather_fragment.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
 
-class CurrentWeatherFragment : Fragment() {
+class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
 
-    companion object {
-        fun newInstance() = CurrentWeatherFragment()
-    }
+    override val kodein by closestKodein()
+    private val viewModelFactory: CurrentWeatherViewModelFactory by instance()
 
     private lateinit var viewModel: CurrentWeatherViewModel
 
@@ -34,18 +30,27 @@ class CurrentWeatherFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(CurrentWeatherViewModel::class.java)
-        // TODO: Use the ViewModel
+        viewModel = ViewModelProviders.of(this, viewModelFactory)
+            .get(CurrentWeatherViewModel::class.java)
 
-        val apiService = ApixuWeatherApiService(ConnectivityInterceptorImpl(context!!))
-        val weatherNetworkDataSource = WeatherNetworkDataSourceImpl(apiService)
-        weatherNetworkDataSource.downloadedCurrentWeather.observe(this, Observer {
-            textView.text = it.currentWeatherEntry.toString()
-            Log.e("DATA", it.currentWeatherEntry.toString())
+        bindUI()
+
+//        val apiService = ApixuWeatherApiService(ConnectivityInterceptorImpl(context!!))
+//        val weatherNetworkDataSource = WeatherNetworkDataSourceImpl(apiService)
+//        weatherNetworkDataSource.downloadedCurrentWeather.observe(this, Observer {
+//            textView.text = it.currentWeatherEntry.toString()
+//            Log.e("DATA", it.currentWeatherEntry.toString())
+//        })
+//
+//        GlobalScope.launch(Dispatchers.Default) {
+//            weatherNetworkDataSource.fetchCurrentWeather("Barcelona")
+//        }
+    }
+
+    private fun bindUI() = launch {
+        val currentWeather = viewModel.weather.await()
+        currentWeather.observe(this@CurrentWeatherFragment, Observer {
+            textView.text = it.toString()
         })
-
-        GlobalScope.launch(Dispatchers.Default) {
-            weatherNetworkDataSource.fetchCurrentWeather("Barcelona")
-        }
     }
 }

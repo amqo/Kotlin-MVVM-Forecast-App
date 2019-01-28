@@ -20,7 +20,7 @@ data class CurrentWeatherEntry(
     @SerializedName("wind_mph")
     val windMph: Double,
     @SerializedName("wind_kph")
-    val windDegree: Double,
+    val windKph: Double,
     @SerializedName("wind_dir")
     val windDir: String,
     @SerializedName("precip_mm")
