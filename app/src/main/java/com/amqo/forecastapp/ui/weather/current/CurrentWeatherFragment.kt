@@ -48,11 +48,17 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
                 bindUIWithWeather(it)
             }
         })
+
+        val weatherLocation = viewModel.weatherLocation.await()
+        weatherLocation.observe(this@CurrentWeatherFragment, Observer {
+            if (it != null) {
+                updateActionBar(it.name)
+            }
+        })
     }
 
     private fun bindUIWithWeather(weather: UnitSpecificCurrentWeatherEntry) {
         with(weather) {
-            updateActionBar("Barcelona")
             updateTemperatures(temperature, feelsLikeTemperature)
             updateCondition(conditionText)
             updatePrecipitation(precipitationVolume)
