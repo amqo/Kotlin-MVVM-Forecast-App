@@ -72,8 +72,8 @@ dependencies {
     implementation "com.jakewharton.threetenabp:threetenabp:1.1.0"
 
     // Glide
-    implementation 'com.github.bumptech.glide:glide:4.8.0'
-    kapt 'com.github.bumptech.glide:compiler:4.8.0'
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
 
     // Groupie RecyclerView
     implementation 'com.xwray:groupie:2.1.0'
