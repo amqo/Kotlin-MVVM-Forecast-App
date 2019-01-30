@@ -42,19 +42,17 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
 
     private fun bindUI() = launch {
         group_loading.visibility = View.VISIBLE
-        consume(viewModel.weather, { weatherResult ->
+        consume(viewModel.weather, { weather ->
             group_loading.visibility = View.GONE
-            bindUIWithWeather(weatherResult)
+            bindUIWithWeather(weather)
         }, {
-            Log.e(CurrentWeatherFragment::class.simpleName, "Error getting weather")
+            Log.e(CurrentWeatherFragment::class.java.simpleName, "Error getting weather")
             // TODO show some visual feedback for this loading error
         })
-
-        val weatherLocation = viewModel.weatherLocation.await()
-        weatherLocation.observe(this@CurrentWeatherFragment, Observer {
-            if (it != null) {
-                updateActionBar(it.name)
-            }
+        consume(viewModel.weatherLocation, {weatherLocation ->
+            updateActionBar(weatherLocation.name)
+        }, {
+            updateActionBar("Weather")
         })
     }
 
