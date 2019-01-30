@@ -23,6 +23,7 @@ class WeatherNetworkDataSourceImpl(
                 }
         } catch (exception: NoConnectivityException) {
             Log.e(NoConnectivityException::class.java.simpleName, "No internet connection", exception)
+            // TODO post response with state ERROR
         }
     }
 }

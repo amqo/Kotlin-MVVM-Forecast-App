@@ -1,14 +1,15 @@
 package com.amqo.forecastapp.ui.weather.current
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.amqo.forecastapp.R
 import com.amqo.forecastapp.data.db.unitlocalized.UnitSpecificCurrentWeatherEntry
+import com.amqo.forecastapp.internal.consume
 import com.amqo.forecastapp.internal.glide.GlideApp
 import com.amqo.forecastapp.ui.base.ScopedFragment
 import kotlinx.android.synthetic.main.current_weather_fragment.*
@@ -41,12 +42,12 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
 
     private fun bindUI() = launch {
         group_loading.visibility = View.VISIBLE
-        val currentWeather = viewModel.weather.await()
-        currentWeather.observe(this@CurrentWeatherFragment, Observer {
-            if (it != null) {
-                group_loading.visibility = View.GONE
-                bindUIWithWeather(it)
-            }
+        consume(viewModel.weather, { weatherResult ->
+            group_loading.visibility = View.GONE
+            bindUIWithWeather(weatherResult)
+        }, {
+            Log.e(CurrentWeatherFragment::class.simpleName, "Error getting weather")
+            // TODO show some visual feedback for this loading error
         })
     }
 
@@ -84,7 +85,7 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
     }
 
     private fun updatePrecipitation(precipitation: Double) {
-        val unitAbbreviation = chooseLocalizedUnitAbbreviation("mm",  "in")
+        val unitAbbreviation = chooseLocalizedUnitAbbreviation("mm", "in")
         textView_precipitation.text = "Precipitation: $precipitation $unitAbbreviation"
     }
 
