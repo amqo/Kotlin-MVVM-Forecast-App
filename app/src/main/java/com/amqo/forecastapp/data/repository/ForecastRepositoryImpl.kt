@@ -8,6 +8,7 @@ import com.amqo.forecastapp.data.db.unitlocalized.UnitSpecificCurrentWeatherEntr
 import com.amqo.forecastapp.data.network.WeatherNetworkDataSource
 import com.amqo.forecastapp.data.network.response.CurrentWeatherResponse
 import com.amqo.forecastapp.data.provider.LocationProvider
+import com.amqo.forecastapp.internal.observeForever
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -25,7 +26,7 @@ class ForecastRepositoryImpl(
 ) : ForecastRepository {
 
     init {
-        weatherNetworkDataSource.downloadedCurrentWeather.observeForever { newCurrentWeather ->
+        observeForever(weatherNetworkDataSource.downloadedCurrentWeather) { newCurrentWeather ->
             persistFetchedCurrentWeather(newCurrentWeather)
         }
     }
