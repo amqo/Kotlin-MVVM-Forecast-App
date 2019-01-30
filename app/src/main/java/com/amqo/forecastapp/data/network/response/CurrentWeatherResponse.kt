@@ -8,4 +8,6 @@ data class CurrentWeatherResponse(
     val location: WeatherLocation,
     @SerializedName("current")
     val currentWeatherEntry: CurrentWeatherEntry
+
+    // TODO add state enum
 )
