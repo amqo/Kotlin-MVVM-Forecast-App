@@ -49,7 +49,7 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
             Log.e(CurrentWeatherFragment::class.java.simpleName, "Error getting weather")
             // TODO show some visual feedback for this loading error
         })
-        consume(viewModel.weatherLocation, {weatherLocation ->
+        consume(viewModel.weatherLocation, { weatherLocation ->
             updateActionBar(weatherLocation.name)
         }, {
             updateActionBar("Weather")
