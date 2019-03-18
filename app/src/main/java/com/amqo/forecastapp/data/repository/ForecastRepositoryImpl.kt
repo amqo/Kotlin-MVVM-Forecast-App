@@ -6,7 +6,8 @@ import com.amqo.forecastapp.data.db.FutureWeatherDao
 import com.amqo.forecastapp.data.db.WeatherLocationDao
 import com.amqo.forecastapp.data.db.entity.WeatherLocation
 import com.amqo.forecastapp.data.db.unitlocalized.current.UnitSpecificCurrentWeatherEntry
-import com.amqo.forecastapp.data.db.unitlocalized.future.UnitSpecificSimpleFutureWeatherEntry
+import com.amqo.forecastapp.data.db.unitlocalized.future.detail.UnitSpecificDetailFutureWeatherEntry
+import com.amqo.forecastapp.data.db.unitlocalized.future.list.UnitSpecificSimpleFutureWeatherEntry
 import com.amqo.forecastapp.data.network.FORECAST_DAYS_COUNT
 import com.amqo.forecastapp.data.network.WeatherNetworkDataSource
 import com.amqo.forecastapp.data.network.response.CurrentWeatherResponse
@@ -42,13 +43,29 @@ class ForecastRepositoryImpl(
         }
     }
 
-    override suspend fun getCurrentWeather(metric: Boolean): LiveData<out UnitSpecificCurrentWeatherEntry> {
+    override suspend fun getCurrentWeather(
+        metric: Boolean
+    ): LiveData<out UnitSpecificCurrentWeatherEntry> {
         return withContext(Dispatchers.IO) {
             initWeatherData()
             return@withContext if (metric) {
                 currentWeatherDao.getMetric()
             } else {
                 currentWeatherDao.getImperial()
+            }
+        }
+    }
+
+    override suspend fun getFutureWeatherByDate(
+        date: LocalDate,
+        metric: Boolean
+    ): LiveData<out UnitSpecificDetailFutureWeatherEntry> {
+        return withContext(Dispatchers.IO) {
+            initWeatherData()
+            return@withContext if (metric) {
+                futureWeatherDao.getDetailedWeatherByDateMetric(date)
+            } else {
+                futureWeatherDao.getDetailedWeatherByDateImperial(date)
             }
         }
     }

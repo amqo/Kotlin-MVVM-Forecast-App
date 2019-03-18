@@ -1,4 +1,4 @@
-package com.amqo.forecastapp.data.db.unitlocalized.future
+package com.amqo.forecastapp.data.db.unitlocalized.future.list
 
 import org.threeten.bp.LocalDate
 

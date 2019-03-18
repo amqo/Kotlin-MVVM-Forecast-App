@@ -1,8 +1,8 @@
 package com.amqo.forecastapp.ui.weather.future.list
 
 import com.amqo.forecastapp.R
-import com.amqo.forecastapp.data.db.unitlocalized.future.MetricSimpleFutureWeatherEntry
-import com.amqo.forecastapp.data.db.unitlocalized.future.UnitSpecificSimpleFutureWeatherEntry
+import com.amqo.forecastapp.data.db.unitlocalized.future.list.MetricSimpleFutureWeatherEntry
+import com.amqo.forecastapp.data.db.unitlocalized.future.list.UnitSpecificSimpleFutureWeatherEntry
 import com.amqo.forecastapp.internal.glide.GlideApp
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
