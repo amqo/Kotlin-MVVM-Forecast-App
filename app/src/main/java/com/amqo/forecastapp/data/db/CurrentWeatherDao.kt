@@ -7,8 +7,8 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.amqo.forecastapp.data.db.entity.CURRENT_WEATHER_ID
 import com.amqo.forecastapp.data.db.entity.CurrentWeatherEntry
-import com.amqo.forecastapp.data.db.unitlocalized.ImperialCurrentWeatherEntry
-import com.amqo.forecastapp.data.db.unitlocalized.MetricCurrentWeatherEntry
+import com.amqo.forecastapp.data.db.unitlocalized.current.ImperialCurrentWeatherEntry
+import com.amqo.forecastapp.data.db.unitlocalized.current.MetricCurrentWeatherEntry
 
 private const val SELECT_QUERY = "select * from current_weather where id = $CURRENT_WEATHER_ID"
 

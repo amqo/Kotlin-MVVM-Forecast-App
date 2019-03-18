@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.amqo.forecastapp.R
-import com.amqo.forecastapp.data.db.unitlocalized.UnitSpecificCurrentWeatherEntry
+import com.amqo.forecastapp.data.db.unitlocalized.current.UnitSpecificCurrentWeatherEntry
 import com.amqo.forecastapp.internal.consume
 import com.amqo.forecastapp.internal.glide.GlideApp
 import com.amqo.forecastapp.ui.base.ScopedFragment

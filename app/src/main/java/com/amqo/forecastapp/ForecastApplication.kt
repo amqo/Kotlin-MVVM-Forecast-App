@@ -27,6 +27,7 @@ class ForecastApplication : Application(), KodeinAware {
 
         bind() from singleton { ForecastDatabase(instance()) }
         bind() from singleton { instance<ForecastDatabase>().currentWeatherDao() }
+        bind() from singleton { instance<ForecastDatabase>().futureWeatherDao() }
         bind() from singleton { instance<ForecastDatabase>().weatherLocationDao() }
         bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
         bind() from singleton { ApixuWeatherApiService(instance()) }
@@ -34,7 +35,7 @@ class ForecastApplication : Application(), KodeinAware {
         bind() from provider { LocationServices.getFusedLocationProviderClient(instance<Context>()) }
         bind() from singleton { LocationProviderImpl(instance(), instance()) }
         bind<ForecastRepository>() with singleton {
-            ForecastRepositoryImpl(instance(), instance(), instance(), instance())
+            ForecastRepositoryImpl(instance(), instance(), instance(), instance(), instance())
         }
         bind<UnitProvider>() with singleton { UnitProviderImpl(instance()) }
         bind() from singleton { CurrentWeatherViewModelFactory(instance(), instance()) }

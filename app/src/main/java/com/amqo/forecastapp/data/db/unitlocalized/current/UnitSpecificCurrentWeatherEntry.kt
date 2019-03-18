@@ -1,4 +1,4 @@
-package com.amqo.forecastapp.data.db.unitlocalized
+package com.amqo.forecastapp.data.db.unitlocalized.current
 
 interface UnitSpecificCurrentWeatherEntry {
     val temperature: Double
