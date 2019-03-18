@@ -11,6 +11,7 @@ import com.amqo.forecastapp.data.provider.UnitProviderImpl
 import com.amqo.forecastapp.data.repository.ForecastRepository
 import com.amqo.forecastapp.data.repository.ForecastRepositoryImpl
 import com.amqo.forecastapp.ui.weather.current.CurrentWeatherViewModelFactory
+import com.amqo.forecastapp.ui.weather.future.list.FutureListWeatherViewModelFactory
 import com.google.android.gms.location.LocationServices
 import com.jakewharton.threetenabp.AndroidThreeTen
 import org.kodein.di.Kodein
@@ -39,6 +40,7 @@ class ForecastApplication : Application(), KodeinAware {
         }
         bind<UnitProvider>() with singleton { UnitProviderImpl(instance()) }
         bind() from singleton { CurrentWeatherViewModelFactory(instance(), instance()) }
+        bind() from singleton { FutureListWeatherViewModelFactory(instance(), instance()) }
     }
 
     override fun onCreate() {

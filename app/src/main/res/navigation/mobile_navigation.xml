@@ -3,15 +3,15 @@
             xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/mobile_navigation" app:startDestination="@id/currentWeatherFragment">
 
-  <fragment android:id="@+id/currentWeatherFragment"
-            android:name="com.amqo.forecastapp.ui.weather.current.CurrentWeatherFragment"
-            android:label="Weather" tools:layout="@layout/current_weather_fragment"/>
-  <fragment android:id="@+id/futureListWeatherFragment"
-            android:name="com.amqo.forecastapp.ui.weather.future.list.FutureListWeatherFragment"
-            android:label="Future Weather" tools:layout="@layout/future_list_weather_fragment"/>
-  <fragment android:id="@+id/futureDetailWeatherFragment"
-            android:name="com.amqo.forecastapp.ui.weather.future.detail.FutureDetailWeatherFragment"
-            android:label="Weather Detail" tools:layout="@layout/future_detail_weather_fragment"/>
-  <fragment android:id="@+id/settingsFragment" android:name="com.amqo.forecastapp.ui.settings.SettingsFragment"
-            android:label="SettingsFragment"/>
+    <fragment android:id="@+id/currentWeatherFragment"
+              android:name="com.amqo.forecastapp.ui.weather.current.CurrentWeatherFragment"
+              android:label="Weather" tools:layout="@layout/current_weather_fragment"/>
+    <fragment android:id="@+id/futureListWeatherFragment"
+              android:name="com.amqo.forecastapp.ui.weather.future.list.FutureListWeatherFragment"
+              android:label="Future Weather" tools:layout="@layout/future_list_weather_fragment"/>
+    <fragment android:id="@+id/futureDetailWeatherFragment"
+              android:name="com.amqo.forecastapp.ui.weather.future.detail.FutureDetailWeatherFragment"
+              android:label="Weather Detail" tools:layout="@layout/future_detail_weather_fragment"/>
+    <fragment android:id="@+id/settingsFragment" android:name="com.amqo.forecastapp.ui.settings.SettingsFragment"
+              android:label="SettingsFragment"/>
 </navigation>

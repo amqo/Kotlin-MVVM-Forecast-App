@@ -4,6 +4,7 @@ import androidx.room.Embedded
 import com.google.gson.annotations.SerializedName
 
 data class Day(
+    @SerializedName("avgtemp_c")
     val avgtempC: Double,
     @SerializedName("avgtemp_f")
     val avgtempF: Double,
